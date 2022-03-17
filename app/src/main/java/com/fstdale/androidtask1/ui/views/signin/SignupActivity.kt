@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.databinding.ActivitySignupBinding
 import com.fstdale.androidtask1.ui.factories.AuthViewModelFactory
@@ -18,7 +18,6 @@ import org.kodein.di.generic.instance
 
 class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
-    //override val kodein by kodein()
     override val kodein by closestKodein()
     private val factory : AuthViewModelFactory by instance()
     private lateinit var viewModel: AuthViewModel
@@ -28,8 +27,9 @@ class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
         setContentView(R.layout.activity_signup)
 
         val binding: ActivitySignupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
-        viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
+        viewModel.authListener = this
     }
 
     override fun onStarted() {
