@@ -1,10 +1,10 @@
-package com.fstdale.androidtask1.views
+package com.fstdale.androidtask1.ui.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.fstdale.androidtask1.R
-import com.fstdale.androidtask1.views.signup.SignupActivity
+import com.fstdale.androidtask1.ui.views.signin.SignupActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
