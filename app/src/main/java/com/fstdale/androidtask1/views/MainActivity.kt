@@ -1,7 +1,8 @@
-package com.fstdale.androidtask1
+package com.fstdale.androidtask1.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.fstdale.androidtask1.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
