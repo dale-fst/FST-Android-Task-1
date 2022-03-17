@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FSTAndroidTask1">
         <activity
+            android:name=".views.signup.SignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
