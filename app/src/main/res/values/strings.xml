@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">FST Android Task 1</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up_header">Sign up for free today!</string>
+    <string name="sign_up_button">Sign up for free</string>
+    <string name="terms">By signing-up, you agree to the terms and conditions and the privacy policies of this training activity.</string>
+    <string name="error_signup_complete_fields">Please complete all the fields before creating your account.</string>
+    <string name="error_login_incorrect">Email and password combination is incorrect.</string>
+    <string name="error_login_complete_fields">Please enter your email and password combination.</string>
+    <string name="error_signup_password_length">Password should be at least 6 characters in length.</string>
+    <string name="error_signup_password_confirm">Password does not match.</string>
+    <string name="sign_in">Sign in</string>
+    <string name="login_header">Sign in to your account</string>
+    <string name="login_signup_link">Don\'t have an account? Sign up for free!</string>
 </resources>

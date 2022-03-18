@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FSTAndroidTask1">
         <activity
-            android:name=".views.MainActivity"
+            android:name=".ui.views.signin.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
