@@ -3,8 +3,11 @@ package com.fstdale.androidtask1.ui.viewmodels
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.fstdale.androidtask1.App
+import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.data.repositories.UserRepository
 import com.fstdale.androidtask1.ui.interfaces.AuthListener
+import com.fstdale.androidtask1.ui.views.login.LoginActivity
 import com.fstdale.androidtask1.ui.views.signin.SignupActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,7 +30,7 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun login() {
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure("Invalid email or password")
+            authListener?.onFailure(App.resourses.getString(R.string.error_login_incorrect))
             return
         }
 
@@ -46,8 +49,23 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
     }
 
     fun signup() {
-        if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure("Please input all values")
+        if (
+            firstname.isNullOrEmpty() ||
+            lastname.isNullOrEmpty() ||
+            email.isNullOrEmpty() ||
+            password.isNullOrEmpty() ||
+            passwordConfirm.isNullOrEmpty()) {
+            authListener?.onFailure(App.resourses.getString(R.string.error_signup_complete_fields))
+            return
+        }
+
+        if(password!!.length < 6) {
+            authListener?.onFailure(App.resourses.getString(R.string.error_signup_password_length))
+            return
+        }
+
+        if(!password.equals(passwordConfirm)) {
+            authListener?.onFailure(App.resourses.getString(R.string.error_signup_password_confirm))
             return
         }
 
@@ -72,9 +90,9 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
     }
 
     fun goToLogin(view: View) {
-//        Intent(view.context, LoginActivity::class.java).also {
-//            view.context.startActivity(it)
-//        }
+        Intent(view.context, LoginActivity::class.java).also {
+            view.context.startActivity(it)
+        }
     }
 
     override fun onCleared() {
