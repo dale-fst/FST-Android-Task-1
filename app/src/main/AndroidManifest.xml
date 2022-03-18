@@ -16,6 +16,9 @@
             android:name=".ui.views.signin.SignupActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.views.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.views.MainActivity"
             android:exported="true">
             <intent-filter>

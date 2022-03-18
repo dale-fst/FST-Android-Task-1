@@ -30,7 +30,7 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun login() {
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure(App.resourses.getString(R.string.error_login_incorrect))
+            authListener?.onFailure(App.resourses.getString(R.string.error_login_complete_fields))
             return
         }
 
