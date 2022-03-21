@@ -1,4 +1,4 @@
-package com.fstdale.androidtask1.ui
+package com.fstdale.androidtask1.ui.pages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,10 +6,10 @@ import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.fstdale.androidtask1.R
-import com.fstdale.androidtask1.ui.feeds.FeedsFragment
-import com.fstdale.androidtask1.ui.home.HomeFragment
-import com.fstdale.androidtask1.ui.home.HomeViewModel
-import com.fstdale.androidtask1.ui.others.OthersFragment
+import com.fstdale.androidtask1.ui.pages.feeds.FeedsFragment
+import com.fstdale.androidtask1.ui.pages.home.HomeFragment
+import com.fstdale.androidtask1.ui.pages.home.HomeViewModel
+import com.fstdale.androidtask1.ui.pages.others.OthersFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

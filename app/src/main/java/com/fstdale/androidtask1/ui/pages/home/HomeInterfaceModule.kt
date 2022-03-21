@@ -1,4 +1,4 @@
-package com.fstdale.androidtask1.ui.home
+package com.fstdale.androidtask1.ui.pages.home
 
 import android.content.Context
 import android.webkit.JavascriptInterface

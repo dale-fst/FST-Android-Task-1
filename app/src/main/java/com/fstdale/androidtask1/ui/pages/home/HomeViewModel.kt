@@ -1,4 +1,4 @@
-package com.fstdale.androidtask1.ui.home
+package com.fstdale.androidtask1.ui.pages.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
