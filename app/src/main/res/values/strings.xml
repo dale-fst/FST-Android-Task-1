@@ -17,5 +17,5 @@
     <string name="error_signup_password_confirm">Password does not match.</string>
     <string name="sign_in">Sign in</string>
     <string name="login_header">Sign in to your account</string>
-    <string name="login_signup_link">Don\'t have an account? Sign up for free!</string>
+    <string name="login_signup_link">Don\'t have an account? <b><u>Sign up</u></b> for free!</string>
 </resources>
