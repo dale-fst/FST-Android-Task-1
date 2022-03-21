@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.fstdale.androidtask1.App
 import com.fstdale.androidtask1.R
+import com.fstdale.androidtask1.data.models.User
 import com.fstdale.androidtask1.data.repositories.UserRepository
 import com.fstdale.androidtask1.ui.interfaces.AuthListener
 import com.fstdale.androidtask1.ui.views.login.LoginActivity
@@ -71,7 +72,8 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
         authListener?.onStarted()
 
-        val disposable = repository.register(email!!, password!!)
+        val user = User(firstname, lastname, email)
+        val disposable = repository.register(user, password!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
