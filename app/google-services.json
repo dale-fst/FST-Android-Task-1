@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "863215909287",
+    "project_id": "fst-dale-training",
+    "storage_bucket": "fst-dale-training.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863215909287:android:c4770c92f39f383bcf1e82",
+        "android_client_info": {
+          "package_name": "com.fstdale.androidtask1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863215909287-6s12g2tvv02bllgvraendma7jm4kf13p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fstdale.androidtask1",
+            "certificate_hash": "3c0b1d35e4c55adfb5e29350e988857b9b1a239a"
+          }
+        },
+        {
+          "client_id": "863215909287-5thp35qpdrmhedsbfo2i0v915vs1gn3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOxHeojKAB0-Noq3JMgsbSgaX51ePPyHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863215909287-5thp35qpdrmhedsbfo2i0v915vs1gn3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
