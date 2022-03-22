@@ -1,19 +1,39 @@
 package com.fstdale.androidtask1.ui.pages.feeds
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.fstdale.androidtask1.data.models.Tweet
+import com.fstdale.androidtask1.data.repositories.TweetRepository
+import kotlinx.coroutines.*
 
-class FeedsViewModel(val app: Application) : AndroidViewModel(app) {
+class FeedsViewModel(private val tweetRepository: TweetRepository) : ViewModel() {
 
-    var tweetList: ArrayList<Tweet> = ArrayList()
-    var data: MutableLiveData<ArrayList<Tweet>> = MutableLiveData()
+    var tweetList: MutableLiveData<ArrayList<Tweet>> = MutableLiveData()
+    val errorMessage = MutableLiveData<String>()
+    var job: Job? = null
+    val loading = MutableLiveData<Boolean>()
 
     fun getTweetList() {
-        tweetList.add(Tweet(1, "@dale", "Hello 1", "1647896284000"))
-        tweetList.add(Tweet(2, "@dale", "Hello 2", "1647896303000"))
-        data.postValue(tweetList)
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = tweetRepository.getTweets()
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    tweetList.postValue(response.body())
+                    loading.value = false
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+            }
+        }
     }
 
+    private fun onError(message: String) {
+        errorMessage.value = message
+        loading.value = false
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
+    }
 }

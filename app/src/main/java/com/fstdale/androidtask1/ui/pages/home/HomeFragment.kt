@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.fstdale.androidtask1.databinding.FragmentHomeBinding
+import com.fstdale.androidtask1.utils.Constant
 
 class HomeFragment : Fragment() {
 
@@ -33,7 +34,7 @@ class HomeFragment : Fragment() {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             addJavascriptInterface(
-                homeInterfaceModule, "Android"
+                homeInterfaceModule, Constant.ANDROID
             )
         }
     }
