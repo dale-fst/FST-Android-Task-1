@@ -6,6 +6,9 @@
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.133" />
         <entry key="app/src/main/res/drawable/ic_splash.xml" value="0.133" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_signin.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_feeds.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18662519440124417" />
         <entry key="app/src/main/res/layout/fragment_others.xml" value="0.1" />

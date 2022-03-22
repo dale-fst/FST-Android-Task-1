@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.fstdale.androidtask1.ui.pages.feeds.FeedViewModel" />
+            type="com.fstdale.androidtask1.ui.pages.feeds.FeedsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.fstdale.androidtask1.data.models.Tweet
 
-class FeedViewModel(val app: Application) : AndroidViewModel(app) {
+class FeedsViewModel(val app: Application) : AndroidViewModel(app) {
 
     var tweetList: ArrayList<Tweet> = ArrayList()
     var data: MutableLiveData<ArrayList<Tweet>> = MutableLiveData()

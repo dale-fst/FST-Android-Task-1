@@ -11,10 +11,6 @@ class HomeInterfaceModule(
 ) {
     @JavascriptInterface
     fun signup() {
-
-    }
-
-    @JavascriptInterface
-    fun getUserLoginStatus() {
+        homeViewModel.singUp()
     }
 }

@@ -15,23 +15,23 @@ import com.fstdale.androidtask1.ui.adapters.TweetViewAdapter
 class FeedsFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedsBinding
-    private val feedViewModel: FeedViewModel by activityViewModels()
+    private val feedsViewModel: FeedsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFeedsBinding.inflate(inflater, container, false).apply {
-            viewModel = feedViewModel
+            viewModel = feedsViewModel
             lifecycleOwner = this@FeedsFragment
         }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        feedViewModel.getTweetList()
+        feedsViewModel.getTweetList()
         binding.refresh.setOnRefreshListener {
-            feedViewModel.getTweetList()
+            feedsViewModel.getTweetList()
             binding.refresh.isRefreshing = false
         }
         val userListUpdateObserver: Observer<ArrayList<Tweet>> =
@@ -42,6 +42,6 @@ class FeedsFragment : Fragment() {
                     adapter = recyclerViewAdapter
                 }
             }
-        feedViewModel.data.observe(viewLifecycleOwner, userListUpdateObserver)
+        feedsViewModel.data.observe(viewLifecycleOwner, userListUpdateObserver)
     }
 }
