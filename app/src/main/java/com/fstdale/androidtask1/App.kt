@@ -21,7 +21,7 @@ class App: Application(), KodeinAware {
 
         bind() from singleton { FirebaseFirestore.getInstance() }
         bind() from singleton { RetrofitService.getInstance() }
-        bind() from singleton { TweetRepository(instance()) }
+        bind() from singleton { TweetRepository(instance(), instance()) }
         bind() from provider { FeedsViewModelFactory(instance()) }
     }
 

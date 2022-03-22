@@ -37,7 +37,7 @@ class FeedsFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         feedsViewModel.getTweetList()
         binding.refresh.setOnRefreshListener {
-            feedsViewModel.getTweetList()
+            feedsViewModel.getTweetList(true)
             binding.refresh.isRefreshing = false
         }
         val userListUpdateObserver: Observer<ArrayList<Tweet>> =

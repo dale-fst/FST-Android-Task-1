@@ -9,7 +9,7 @@ import com.fstdale.androidtask1.data.models.Tweet
 @Dao
 interface TweetDao {
     @Query("SELECT * FROM tweet order by timestamp DESC")
-    fun getTweets(feedIds: ArrayList<Int>): List<Tweet>
+    fun getTweets(): List<Tweet>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTweet(tweet: Tweet)

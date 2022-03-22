@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fstdale.androidtask1.data.models.Tweet
 import com.fstdale.androidtask1.data.repositories.TweetRepository
+import com.fstdale.androidtask1.utils.Constant
+import com.fstdale.androidtask1.utils.Utils
 import kotlinx.coroutines.*
 
 class FeedsViewModel(private val tweetRepository: TweetRepository) : ViewModel() {
@@ -13,15 +15,26 @@ class FeedsViewModel(private val tweetRepository: TweetRepository) : ViewModel()
     var job: Job? = null
     val loading = MutableLiveData<Boolean>()
 
-    fun getTweetList() {
+    fun getTweetList(forceReplace: Boolean = false) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = tweetRepository.getTweets()
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    tweetList.postValue(response.body())
-                    loading.value = false
-                } else {
-                    onError("Error : ${response.message()} ")
+            val local = tweetRepository.getTweets()
+            if(!forceReplace && local.isNotEmpty()) {
+                tweetList.postValue(ArrayList(local))
+            } else {
+                val response = tweetRepository.getTweetsApi()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val list = response.body()
+                        list?.forEach {
+                            it.name = Constant.TWITTER_ARTIST
+                            it.timestamp = Utils.convertDate(it.created_at)
+                        }
+                        tweetList.postValue(list)
+                        tweetRepository.insertTweets(list!!)
+                        loading.value = false
+                    } else {
+                        onError("Error : ${response.message()} ")
+                    }
                 }
             }
         }

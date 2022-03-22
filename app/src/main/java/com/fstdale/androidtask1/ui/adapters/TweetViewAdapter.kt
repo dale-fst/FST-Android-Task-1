@@ -19,11 +19,8 @@ class TweetViewAdapter(
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
         val tweet = userTweets[position]
-        holder.binding.model = Tweet(
-            tweet.id,
-            Constant.TWITTER_ARTIST,
-            tweet.text,
-            tweet.created_at)
+        tweet.name = Constant.TWITTER_ARTIST
+        holder.binding.model = tweet
     }
 
     override fun getItemCount(): Int {
