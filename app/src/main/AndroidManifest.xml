@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FSTAndroidTask1" >
         <activity
-            android:name=".ui.pages.signup.SignupActivity"
+            android:name=".ui.pages.auth.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.pages.login.LoginActivity"
+            android:name=".ui.pages.auth.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.pages.MainActivity"
