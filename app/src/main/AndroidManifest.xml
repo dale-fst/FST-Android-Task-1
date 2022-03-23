@@ -15,12 +15,15 @@
         android:theme="@style/Theme.FSTAndroidTask1" >
         <activity
             android:name=".ui.pages.auth.SignupActivity"
+            android:label="Sign in"
             android:exported="false" />
         <activity
             android:name=".ui.pages.auth.LoginActivity"
+            android:label="Login"
             android:exported="false" />
         <activity
             android:name=".ui.pages.MainActivity"
+            android:label="Home Page"
             android:exported="true"
             android:theme="@style/Theme.App.Starting" >
             <intent-filter>

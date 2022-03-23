@@ -11,6 +11,11 @@ class FirebaseSource(private val database: FirebaseFirestore) {
         FirebaseAuth.getInstance()
     }
 
+    fun getUserDetails() = database
+        .collection("users")
+        .document(firebaseAuth.uid!!)
+        .get()
+
     fun login(email: String, password: String) = Completable.create { emitter ->
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (!emitter.isDisposed) {

@@ -8,6 +8,7 @@ import com.fstdale.androidtask1.data.repositories.UserRepository
 import com.fstdale.androidtask1.data.services.RetrofitService
 import com.fstdale.androidtask1.ui.pages.auth.AuthViewModelFactory
 import com.fstdale.androidtask1.ui.pages.feeds.FeedsViewModelFactory
+import com.fstdale.androidtask1.ui.pages.others.OthersViewModelFactory
 import com.google.firebase.firestore.FirebaseFirestore
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -29,6 +30,7 @@ class App: Application(), KodeinAware {
         bind() from singleton { UserRepository(instance()) }
         bind() from provider { FeedsViewModelFactory(instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from provider { OthersViewModelFactory(instance()) }
     }
 
     companion object {

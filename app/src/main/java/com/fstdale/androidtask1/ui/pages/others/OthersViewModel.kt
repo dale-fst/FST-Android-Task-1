@@ -1,4 +1,25 @@
 package com.fstdale.androidtask1.ui.pages.others
 
-class OthersViewModel {
+import androidx.lifecycle.ViewModel
+import com.fstdale.androidtask1.data.models.User
+import com.fstdale.androidtask1.data.repositories.UserRepository
+
+class OthersViewModel(private val repository: UserRepository) : ViewModel() {
+
+    var updateListener: UpdateListener? = null
+
+    fun getUserDetails() {
+        if(repository.currentUser() == null) {
+            updateListener?.onUpdate("")
+            return
+        }
+
+        repository.getUserDetails().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document = task.result
+                val user: User = document.toObject(User::class.java)!!
+                updateListener?.onUpdate("${user.firstname} ${user.lastname}")
+            }
+        }
+    }
 }
