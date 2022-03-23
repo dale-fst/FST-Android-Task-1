@@ -1,16 +1,17 @@
 package com.fstdale.androidtask1.ui.pages.others
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.fstdale.androidtask1.databinding.FragmentOthersBinding
 import kotlinx.android.synthetic.main.fragment_others.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+
 
 class OthersFragment : Fragment(), UpdateListener, KodeinAware {
 
@@ -34,6 +35,9 @@ class OthersFragment : Fragment(), UpdateListener, KodeinAware {
     }
 
     override fun onUpdate(value: String) {
+        if(value == "") {
+            activity?.finish()
+        }
         name.text = value
         progressbar.visibility = View.GONE
     }

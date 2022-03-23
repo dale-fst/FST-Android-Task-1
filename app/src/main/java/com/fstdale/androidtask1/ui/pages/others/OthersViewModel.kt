@@ -9,10 +9,8 @@ class OthersViewModel(private val repository: UserRepository) : ViewModel() {
     var updateListener: UpdateListener? = null
 
     fun getUserDetails() {
-        if(repository.currentUser() == null) {
-            updateListener?.onUpdate("")
+        if(repository.currentUser() == null)
             return
-        }
 
         repository.getUserDetails().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -21,5 +19,10 @@ class OthersViewModel(private val repository: UserRepository) : ViewModel() {
                 updateListener?.onUpdate("${user.firstname} ${user.lastname}")
             }
         }
+    }
+
+    fun logout() {
+        repository.logout()
+        updateListener?.onUpdate("")
     }
 }
