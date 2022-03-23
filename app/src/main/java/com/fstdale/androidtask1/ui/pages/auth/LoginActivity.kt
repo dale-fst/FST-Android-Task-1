@@ -25,6 +25,9 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.authListener = this
+        if(viewModel.user != null) {
+            finish()
+        }
     }
 
     override fun onStarted() {
@@ -35,8 +38,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
     override fun onSuccess() {
         progressbar.visibility = View.GONE
-        // TODO: logic after logging in.
-        Toast.makeText(this, "User Logged in", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.account_login), Toast.LENGTH_SHORT).show()
         finish()
     }
 

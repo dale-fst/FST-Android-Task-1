@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.pages.others.OthersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:layout_marginTop="50dp"
         android:text="@string/others" />
 
 </FrameLayout>
