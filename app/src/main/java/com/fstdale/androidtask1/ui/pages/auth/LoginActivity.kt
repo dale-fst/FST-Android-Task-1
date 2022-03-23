@@ -18,13 +18,11 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
     override val kodein by closestKodein()
     private val factory : AuthViewModelFactory by instance()
     private lateinit var viewModel: AuthViewModel
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
         viewModel.authListener = this
@@ -47,7 +45,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
     override fun onSuccess() {
         progressbar.visibility = View.GONE
         Toast.makeText(this, getString(R.string.account_login), Toast.LENGTH_SHORT).show()
-        finish()
+        viewModel.goToMain(binding.root)
     }
 
     override fun onFailure(message: String) {

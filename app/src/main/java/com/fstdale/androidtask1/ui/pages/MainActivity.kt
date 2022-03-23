@@ -1,21 +1,32 @@
 package com.fstdale.androidtask1.ui.pages
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.fstdale.androidtask1.R
-import com.fstdale.androidtask1.ui.pages.auth.LoginActivity
+import com.fstdale.androidtask1.databinding.ActivityMainBinding
+import com.fstdale.androidtask1.ui.pages.auth.AuthViewModel
+import com.fstdale.androidtask1.ui.pages.auth.AuthViewModelFactory
 import com.fstdale.androidtask1.ui.pages.feeds.FeedsFragment
 import com.fstdale.androidtask1.ui.pages.home.HomeFragment
 import com.fstdale.androidtask1.ui.pages.home.HomeViewModel
 import com.fstdale.androidtask1.ui.pages.others.OthersFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
+
+    override val kodein by closestKodein()
+    private val factory : AuthViewModelFactory by instance()
+    private lateinit var viewModel: AuthViewModel
 
     private val homeFragment = HomeFragment()
     private val feedsFragment = FeedsFragment()
@@ -24,14 +35,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         installSplashScreen()
-        setContentView(R.layout.activity_main)
-
         homeViewModel.setURL()
         replaceFragment(homeFragment)
 
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
+        binding.viewmodel = viewModel
+
         if(!isLoggedIn())
-            openLogin()
+            viewModel.goToLogin(binding.root)
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
@@ -41,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                     if(isLoggedIn())
                         replaceFragment(otherFragment)
                     else
-                        openLogin()
+                        viewModel.goToLogin(binding.root)
                 }
             }
             true
@@ -49,11 +63,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isLoggedIn() = FirebaseAuth.getInstance().currentUser != null
-
-    private fun openLogin() {
-        val intent = Intent(this@MainActivity, LoginActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun replaceFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()

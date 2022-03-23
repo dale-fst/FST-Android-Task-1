@@ -10,6 +10,7 @@ import com.fstdale.androidtask1.App
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.data.models.User
 import com.fstdale.androidtask1.data.repositories.UserRepository
+import com.fstdale.androidtask1.ui.pages.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -94,6 +95,13 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun goToLogin(view: View) {
         Intent(view.context, LoginActivity::class.java).also {
+            view.context.startActivity(it)
+        }
+        view.context.getActivity()?.finish()
+    }
+
+    fun goToMain(view: View) {
+        Intent(view.context, MainActivity::class.java).also {
             view.context.startActivity(it)
         }
         view.context.getActivity()?.finish()
