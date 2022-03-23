@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.databinding.FragmentOthersBinding
 import kotlinx.android.synthetic.main.fragment_others.*
 import org.kodein.di.KodeinAware
@@ -24,6 +26,7 @@ class OthersFragment : Fragment(), UpdateListener, KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.others)
         othersViewModel = ViewModelProvider(this, factory).get(OthersViewModel::class.java)
         binding = FragmentOthersBinding.inflate(inflater, container, false).apply {
             viewModel = othersViewModel
