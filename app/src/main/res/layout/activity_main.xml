@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.pages.MainActivity">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.fstdale.androidtask1.ui.pages.auth.AuthViewModel"/>
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
