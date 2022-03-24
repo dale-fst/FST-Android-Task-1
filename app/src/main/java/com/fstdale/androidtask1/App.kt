@@ -24,7 +24,6 @@ class App: Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@App))
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         bind() from singleton { FirebaseFirestore.getInstance() }
         bind() from singleton { RetrofitService.getInstance() }
         bind() from singleton { FirebaseSource(instance()) }
@@ -42,6 +41,7 @@ class App: Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         instance = this
         resourses = resources
     }

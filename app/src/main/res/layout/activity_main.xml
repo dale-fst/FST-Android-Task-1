@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="viewmodel"
-            type="com.fstdale.androidtask1.ui.pages.auth.AuthViewModel"/>
+            name="viewModel"
+            type="com.fstdale.androidtask1.ui.pages.MainViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,11 +18,12 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primary"
+            app:onNavigationItemSelected="@{viewModel::setOnNavigationItemSelectedListener}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/menu"
-            android:background="@color/primary"
             app:itemIconTint="@drawable/navigation_view_colored"
             app:itemTextColor="@drawable/navigation_view_colored"/>
 
