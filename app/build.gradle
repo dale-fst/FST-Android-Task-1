@@ -22,7 +22,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            resValue "string", "URL_PLAYGOOSE", '"https://staging-home-playgoose-standalone.dsign.gift/artist/playgoose"'
+        }
         release {
+            resValue "string", "URL_PLAYGOOSE", '"https://staging-home-playgoose-standalone.dsign.gift/artist/playgoose"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
