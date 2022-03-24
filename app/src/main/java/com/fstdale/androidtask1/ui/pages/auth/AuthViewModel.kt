@@ -23,8 +23,8 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
     var email: String? = null
     var password: String? = null
     var passwordConfirm: String? = null
-    var authListener: AuthListener? = null
     val progress = MutableLiveData(false)
+    val error = MutableLiveData("")
 
     private val disposables = CompositeDisposable()
 
@@ -34,19 +34,19 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
     fun login() {
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-            authListener?.onFailure(App.resourses.getString(R.string.error_login_complete_fields))
+            error.postValue(App.resourses.getString(R.string.error_login_complete_fields))
             return
         }
 
-        authListener?.onStarted()
+        progress.postValue(true)
 
         val disposable = repository.login(email!!, password!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                authListener?.onSuccess()
+                goToMain()
             }, {
-                authListener?.onFailure(it.message!!)
+                error.postValue(it.message!!)
             })
 
         disposables.add(disposable)
@@ -59,30 +59,30 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
             email.isNullOrEmpty() ||
             password.isNullOrEmpty() ||
             passwordConfirm.isNullOrEmpty()) {
-            authListener?.onFailure(App.resourses.getString(R.string.error_signup_complete_fields))
+            error.postValue(App.resourses.getString(R.string.error_signup_complete_fields))
             return
         }
 
         if(password!!.length < 6) {
-            authListener?.onFailure(App.resourses.getString(R.string.error_signup_password_length))
+            error.postValue(App.resourses.getString(R.string.error_signup_password_length))
             return
         }
 
         if(!password.equals(passwordConfirm)) {
-            authListener?.onFailure(App.resourses.getString(R.string.error_signup_password_confirm))
+            error.postValue(App.resourses.getString(R.string.error_signup_password_confirm))
             return
         }
 
-        authListener?.onStarted()
+        progress.postValue(true)
 
         val user = User(firstname, lastname, email)
         val disposable = repository.register(user, password!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                authListener?.onSuccess()
+                goToMain()
             }, {
-                authListener?.onFailure(it.message!!)
+                error.postValue(it.message!!)
             })
 
         disposables.add(disposable)
@@ -102,11 +102,11 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
         view.context.getActivity()?.finish()
     }
 
-    fun goToMain(view: View) {
-        Intent(view.context, MainActivity::class.java).also {
-            view.context.startActivity(it)
-        }
-        view.context.getActivity()?.finish()
+    fun goToMain() {
+//        Intent(view.context, MainActivity::class.java).also {
+//            view.context.startActivity(it)
+//        }
+//        view.context.getActivity()?.finish()
     }
 
     override fun onCleared() {

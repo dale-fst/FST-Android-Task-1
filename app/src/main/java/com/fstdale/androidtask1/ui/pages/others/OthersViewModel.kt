@@ -1,5 +1,8 @@
 package com.fstdale.androidtask1.ui.pages.others
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -28,9 +31,13 @@ class OthersViewModel(private val repository: UserRepository) : ViewModel() {
     }
 
     fun logout(view: View) {
+        repository.logout()
         Intent(view.context, LoginActivity::class.java).also {
             view.context.startActivity(it)
         }
-        repository.logout()
+        view.context.getActivity()?.finish()
     }
+
+    private tailrec fun Context.getActivity(): Activity? = this as? Activity
+        ?: (this as? ContextWrapper)?.baseContext?.getActivity()
 }

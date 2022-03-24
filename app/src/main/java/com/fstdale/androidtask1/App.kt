@@ -2,6 +2,7 @@ package com.fstdale.androidtask1
 
 import android.app.Application
 import android.content.res.Resources
+import androidx.appcompat.app.AppCompatDelegate
 import com.fstdale.androidtask1.data.firebase.FirebaseSource
 import com.fstdale.androidtask1.data.repositories.TweetRepository
 import com.fstdale.androidtask1.data.repositories.UserRepository
@@ -23,6 +24,7 @@ class App: Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@App))
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         bind() from singleton { FirebaseFirestore.getInstance() }
         bind() from singleton { RetrofitService.getInstance() }
         bind() from singleton { FirebaseSource(instance()) }

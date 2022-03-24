@@ -28,7 +28,19 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginBottom="16dp"
                 android:textSize="25sp"
+                android:textAlignment="center"
                 android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:text="@={viewmodel.error}"
+                android:visibility='@{viewmodel.error != "" ? View.VISIBLE : View.GONE}'
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

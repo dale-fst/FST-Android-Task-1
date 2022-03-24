@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.ui.pages.auth.SignupActivity
 
-
 class HomeViewModel(val app: Application) : AndroidViewModel(app) {
 
     var url = MutableLiveData<String>()
