@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
         viewModel.authListener = this
         if(viewModel.user != null) {
             finish()
@@ -37,21 +38,16 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
     }
 
     override fun onStarted() {
-        progressbar.visibility = View.VISIBLE
-        login.visibility = View.GONE
-        signup.visibility = View.GONE
+        viewModel.progress.postValue(true)
     }
 
     override fun onSuccess() {
-        progressbar.visibility = View.GONE
         Toast.makeText(this, getString(R.string.account_login), Toast.LENGTH_SHORT).show()
         viewModel.goToMain(binding.root)
     }
 
     override fun onFailure(message: String) {
-        progressbar.visibility = View.GONE
-        login.visibility = View.VISIBLE
-        signup.visibility = View.VISIBLE
+        viewModel.progress.postValue(false)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

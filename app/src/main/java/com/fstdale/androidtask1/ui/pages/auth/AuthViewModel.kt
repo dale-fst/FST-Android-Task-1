@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fstdale.androidtask1.App
 import com.fstdale.androidtask1.R
@@ -23,6 +24,7 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
     var password: String? = null
     var passwordConfirm: String? = null
     var authListener: AuthListener? = null
+    val progress = MutableLiveData(false)
 
     private val disposables = CompositeDisposable()
 

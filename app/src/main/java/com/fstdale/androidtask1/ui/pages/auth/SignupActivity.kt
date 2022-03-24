@@ -2,13 +2,11 @@ package com.fstdale.androidtask1.ui.pages.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.databinding.ActivitySignupBinding
-import kotlinx.android.synthetic.main.activity_signup.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
@@ -25,6 +23,7 @@ class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
         viewModel.authListener = this
         if(viewModel.user != null) {
             finish()
@@ -37,19 +36,16 @@ class SignupActivity : AppCompatActivity(), AuthListener, KodeinAware {
     }
 
     override fun onStarted() {
-        progressbar.visibility = View.VISIBLE
-        signup.visibility = View.GONE
+        viewModel.progress.postValue(true)
     }
 
     override fun onSuccess() {
-        progressbar.visibility = View.GONE
         Toast.makeText(this, getString(R.string.account_created), Toast.LENGTH_SHORT).show()
         viewModel.goToMain(binding.root)
     }
 
     override fun onFailure(message: String) {
-        progressbar.visibility = View.GONE
-        signup.visibility = View.VISIBLE
+        viewModel.progress.postValue(false)
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
