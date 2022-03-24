@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.databinding.ActivityLoginBinding
 import com.fstdale.androidtask1.ui.pages.MainActivity
+import com.fstdale.androidtask1.utils.interfaces.AuthCallback
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance

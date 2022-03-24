@@ -11,6 +11,7 @@ import com.fstdale.androidtask1.App
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.data.models.User
 import com.fstdale.androidtask1.data.repositories.UserRepository
+import com.fstdale.androidtask1.utils.interfaces.AuthCallback
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
