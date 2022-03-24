@@ -1,4 +1,4 @@
-package com.fstdale.androidtask1.ui.pages
+package com.fstdale.androidtask1.utils.interfaces
 
 import androidx.fragment.app.Fragment
 

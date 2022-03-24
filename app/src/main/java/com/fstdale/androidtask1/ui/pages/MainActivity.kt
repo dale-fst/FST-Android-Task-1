@@ -11,6 +11,7 @@ import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.databinding.ActivityMainBinding
 import com.fstdale.androidtask1.ui.pages.home.HomeFragment
 import com.fstdale.androidtask1.ui.pages.home.HomeViewModel
+import com.fstdale.androidtask1.utils.interfaces.MenuCallback
 import com.google.firebase.auth.FirebaseAuth
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein

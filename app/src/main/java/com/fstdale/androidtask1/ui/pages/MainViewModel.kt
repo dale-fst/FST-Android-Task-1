@@ -14,6 +14,7 @@ import com.fstdale.androidtask1.ui.pages.auth.LoginActivity
 import com.fstdale.androidtask1.ui.pages.feeds.FeedsFragment
 import com.fstdale.androidtask1.ui.pages.home.HomeFragment
 import com.fstdale.androidtask1.ui.pages.others.OthersFragment
+import com.fstdale.androidtask1.utils.interfaces.MenuCallback
 
 class MainViewModel(val app: Application) : AndroidViewModel(app) {
 
