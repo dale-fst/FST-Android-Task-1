@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.data.models.Tweet
 import com.fstdale.androidtask1.databinding.FragmentFeedsBinding
 import com.fstdale.androidtask1.ui.adapters.TweetViewAdapter
@@ -26,6 +28,7 @@ class FeedsFragment : Fragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.feeds)
         feedsViewModel = ViewModelProvider(this, factory).get(FeedsViewModel::class.java)
         binding = FragmentFeedsBinding.inflate(inflater, container, false).apply {
             viewModel = feedsViewModel

@@ -7,6 +7,8 @@ import androidx.fragment.app.activityViewModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.databinding.FragmentHomeBinding
 import com.fstdale.androidtask1.utils.Constant
 
@@ -20,6 +22,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.home)
         binding = FragmentHomeBinding.inflate(inflater, container, false).apply {
             viewModel = homeViewModel
             lifecycleOwner = this@HomeFragment
