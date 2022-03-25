@@ -7,7 +7,9 @@ import com.fstdale.androidtask1.data.models.Tweet
 import com.fstdale.androidtask1.data.repositories.TweetRepository
 import com.fstdale.androidtask1.utils.Constant
 import com.fstdale.androidtask1.utils.Utils
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FeedsViewModel(private val tweetRepository: TweetRepository) : ViewModel() {
 

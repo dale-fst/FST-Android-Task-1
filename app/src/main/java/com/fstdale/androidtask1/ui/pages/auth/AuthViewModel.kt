@@ -7,14 +7,15 @@ import android.content.Intent
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.fstdale.androidtask1.App
 import com.fstdale.androidtask1.R
 import com.fstdale.androidtask1.data.models.User
 import com.fstdale.androidtask1.data.repositories.UserRepository
+import com.fstdale.androidtask1.utils.Constant
 import com.fstdale.androidtask1.utils.interfaces.AuthCallback
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import com.google.firebase.auth.FirebaseAuthException
+import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -27,13 +28,13 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
     val error = MutableLiveData("")
     var authCallback: AuthCallback? = null
 
-    private val disposables = CompositeDisposable()
-
     val user by lazy {
         repository.currentUser()
     }
 
     fun login() {
+        error.postValue("")
+
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
             error.postValue(App.resourses.getString(R.string.error_login_complete_fields))
             return
@@ -41,19 +42,23 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
         progress.postValue(true)
 
-        val disposable = repository.login(email!!, password!!)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                authCallback?.onFinish()
-            }, {
-                error.postValue(it.message!!)
-            })
-
-        disposables.add(disposable)
+        viewModelScope.launch {
+            try {
+                repository.login(email!!, password!!)
+                if(repository.currentUser() != null)
+                    authCallback?.onFinish()
+                else
+                    errorMessageAuth()
+            } catch(er: Exception) {
+                error.postValue(er.message!!)
+                progress.postValue(false)
+            }
+        }
     }
 
     fun signup() {
+        error.postValue("")
+
         if (
             firstname.isNullOrEmpty() ||
             lastname.isNullOrEmpty() ||
@@ -76,17 +81,26 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
 
         progress.postValue(true)
 
-        val user = User(firstname, lastname, email)
-        val disposable = repository.register(user, password!!)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                authCallback?.onFinish()
-            }, {
-                error.postValue(it.message!!)
-            })
+        viewModelScope.launch {
+            try {
+                repository.register(email!!, password!!)
+                val currentUser = repository.currentUser()
+                if(currentUser != null) {
+                    repository.createUser(User(firstname, lastname, email, currentUser.uid))
+                    authCallback?.onFinish()
+                } else
+                    errorMessageAuth()
+            } catch(er: Exception) {
+                error.postValue(er.message!!)
+                progress.postValue(false)
+            }
+        }
+    }
 
-        disposables.add(disposable)
+    private fun errorMessageAuth() {
+        throw FirebaseAuthException(
+            Constant.ERROR_AUTH,
+            App.resourses.getString(R.string.error_failed))
     }
 
     fun goToSignup(view: View) {
@@ -101,11 +115,6 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
             view.context.startActivity(it)
         }
         view.context.getActivity()?.finish()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposables.dispose()
     }
 
     private tailrec fun Context.getActivity(): Activity? = this as? Activity

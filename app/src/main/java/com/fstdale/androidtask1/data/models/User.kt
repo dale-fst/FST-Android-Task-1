@@ -8,9 +8,8 @@ import com.google.firebase.firestore.Exclude
 data class User(
     val firstname: String? = null,
     val lastname: String? = null,
-    val email: String? = null
-){
+    val email: String? = null,
     @PrimaryKey
     @get:Exclude
     var uid: String = ""
-}
+)

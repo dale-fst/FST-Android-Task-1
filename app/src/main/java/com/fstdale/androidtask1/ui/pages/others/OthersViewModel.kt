@@ -23,8 +23,9 @@ class OthersViewModel(private val repository: UserRepository) : ViewModel() {
         repository.getUserDetails().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val document = task.result
-                val user: User = document.toObject(User::class.java)!!
-                name.postValue("${user.firstname} ${user.lastname}")
+                val user: User? = document.toObject(User::class.java)!!
+                if(user != null)
+                    name.postValue("${user.firstname} ${user.lastname}")
             }
             progress.postValue(false)
         }

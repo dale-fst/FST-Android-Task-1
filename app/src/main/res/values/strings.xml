@@ -18,6 +18,7 @@
     <string name="login_header">Sign in to your account</string>
     <string name="login_signup_link">Don\'t have an account? <b><u>Sign up</u></b> for free!</string>
     <string name="login_login_link">Already have an account? <b><u>Login</u></b> here.</string>
+    <string name="error_failed">Failed to process request at this time.</string>
     <string name="account_created">Your account has been created.</string>
     <string name="account_login">You have logged-in.</string>
     <string name="home">Home</string>
