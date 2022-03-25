@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.fstdale.androidtask1.ui.pages.feeds.FeedsViewModel" />
@@ -18,8 +19,19 @@
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list"
+                android:visibility="@{!viewModel.progress ? View.VISIBLE : View.INVISIBLE}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.progress ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/refresh"
+            app:layout_constraintEnd_toEndOf="@+id/refresh"
+            app:layout_constraintStart_toStartOf="@+id/refresh"
+            app:layout_constraintTop_toTopOf="@+id/refresh" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

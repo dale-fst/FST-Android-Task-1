@@ -5,4 +5,6 @@ object Constant {
 
     const val TWITTER_ARTIST = "akasoeiji"
     const val TWITTER_PAGE = 10
+
+    const val ERROR_AUTH = "ERROR_AUTH"
 }
